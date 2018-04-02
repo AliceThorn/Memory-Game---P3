@@ -71,8 +71,8 @@ function resetGame() {
   matchedCards = [];
   unmatchedCards = [];
 
-
-let cardDeck = document.querySelector('.deck');
+  // shuffle function
+  let cardDeck = document.querySelector('.deck');
 
   var shuffleArray = shuffle(cardArray);
   shuffleArray = cardArray.forEach(function(card) {
@@ -85,12 +85,13 @@ let cardDeck = document.querySelector('.deck');
     // add event listener for once card clicked
     card.addEventListener("click", clickedCard);
 
-    //start time on click of first card
-$("card").one( "click", setTime());
 
 
-//function for what happens when cards are clicked in
+    //function for what happens when cards are clicked in
     function clickedCard() {
+      if (secondsPlayed === 0) {
+        startTimer();
+      }
       console.log("open... " + openCards);
       console.log(openCards.includes(card));
       console.log(matchedCards.includes(card));
@@ -143,7 +144,7 @@ function match() {
   //css animation shake here
 
   if(matchedCards.length === 16) {
-      showModal();
+      gameWon();
   }
 }
 
@@ -192,26 +193,40 @@ window.onclick = function(event) {
     }
 }}
 
-//Timer Function As seen on https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
-var minutesLabel = document.getElementById("minutes");
-var secondsLabel = document.getElementById("seconds");
-var totalSeconds = 0;
-setInterval(setTime, 1000);
+//Timer Function
 
-function setTime() {
-  ++totalSeconds;
-  secondsLabel.innerHTML = pad(totalSeconds % 60);
-  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+let secondsPlayed = 0;
+let timer;
+
+function startTimer() {
+  secondsPlayed = 0;
+  timer = setInterval(tickTimer, 1000);
 }
 
-function pad(val) {
-  var valString = val + "";
-  if (valString.length < 2) {
-    return "0" + valString;
-  } else {
-    return valString;
-  }
+function tickTimer() {
+  secondsPlayed++;
+  console.log("tick..." + secondsPlayed);
+  showTimer(secondsPlayed);
 }
+
+function stopTimer() {
+  clearTimeout(timer);
+}
+
+function showTimer(i) {
+  let minutes = Math.floor(i / 60);
+  let seconds = Math.floor(i % 60);
+  let m = document.getElementById("minutes");
+  let s = document.getElementById("seconds");
+  m.innerHTML = checkTime(minutes);
+  s.innerHTML = checkTime(seconds);
+}
+
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+
 
 // Get the modal
 var modal = document.getElementById('memoryModal');
@@ -221,6 +236,11 @@ var span = document.getElementsByClassName("close")[0];
 
 function showModal() {
     modal.style.display = "block";
+}
+
+function gameWon() {
+  stopTimer();
+  showModal();
 }
 
 // When the user clicks on <span> (x), close the modal
