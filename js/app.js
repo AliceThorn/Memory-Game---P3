@@ -171,9 +171,6 @@ var modal = document.getElementById('memoryModal');
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-btn.onclick = function() {
-    modal.style.display = "block";
-
 /* When the user matched all 16 cards, open the modal
 if (matchedCards.length === 16){ function modal () {
     modal.style.display = "block";
@@ -191,7 +188,7 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }}
- 
+
 //Timer Function As seen on https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
