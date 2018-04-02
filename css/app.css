@@ -108,10 +108,17 @@ h1 {
     display: inline-block;
 }
 
+.score-panel .timer {
+    float: right;
+    margin: 0 0 0 20px;
+}
+
 .score-panel .restart {
     float: right;
     cursor: pointer;
 }
+
+
 
 /* Modal CSS by https://www.w3schools.com/howto/howto_css_modals.asp */
 /* The Modal (background) */

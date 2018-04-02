@@ -13,19 +13,24 @@
 
     <div class="container">
         <header>
-            <h1>Matching Game</h1>
+            <h1>Alicia's Matching Game</h1>
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
+        	<ul id = "allstars" class="stars">
+        		<li><i id = "star-one" class="fa fa-star"></i></li>
+        		<li><i id = "star-two" class="fa fa-star"></i></li>
+        		<li><i id = "star-three" class="fa fa-star"></i></li>
         	</ul>
 
-        	<span class="moves">3</span> Moves
+        	<span id = "counter" class="moves">0</span> Moves
 
-            <div class="restart">
+          <!-- Display the countdown timer in an element -->
+          <div id ="clock"  class="timer">
+              <label id="minutes">00</label>:<label id="seconds">00</label>
+          </div>
+
+          <div id ="reset"  class="restart">
         		<i class="fa fa-repeat"></i>
         	</div>
         </section>
@@ -85,15 +90,15 @@
 <!-- Modal HTML by https://www.w3schools.com/howto/howto_css_modals.asp -->
     <!-- Trigger/Open The Modal -->
 
-
 <!-- The Modal -->
 <div id="memoryModal" class="modal">
 
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-    <p>Congratulations
-You have complete the Memory Game
+    <h1>Congratulations! You have complete the Memory Game!
+    </h1>
+    <p>Moves = x, Rating = y, Time = z.
     </p>
   </div>
 
