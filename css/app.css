@@ -103,6 +103,10 @@ h1 {
     margin: 0 5px 0 0;
 }
 
+.score-panel .stars.fa-star-o {
+
+}
+
 .score-panel .stars li {
     list-style: none;
     display: inline-block;

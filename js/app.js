@@ -9,28 +9,33 @@ let unmatchedCards = [];
 
 // Moves Counter -- Increment Number Function As seen at https://stackoverflow.com/questions/15280851/javascript-increment-value-inside-html
 function movesCounter() {
-    var counter = document.getElementById("counter");
-    var moves = counter.innerHTML;
+    let counter = document.getElementById("counter");
+    let moves = counter.innerHTML;
     moves++;
     counter.innerHTML = moves;
 }
-/*Star Rating
+
+//Star Rating
 function starRating() {
-  if (counter.innerHTML >= 3 && counter.innerHTML < 8){
-    var starone = document.getElementById('star-one');
-        starone.remove();
+  const starOne = document.getElementById("star-one");
+  const starTwo = document.getElementById("star-two");
+  const starThree = document.getElementById("star-three");
+
+  if (counter.innerHTML > 30){
+    starOne.classList.add("fa-star-o")
+    starTwo.classList.add("fa-star-o")
+    starOne.classList.remove("fa-star")
+    starTwo.classList.remove("fa-star")
 }
-if (counter.innerHTML >= 8){
-    var startwo = document.getElementById('star-two');
-        startwo.remove();
+if (counter.innerHTML > 16){
+  starOne.classList.add("fa-star-o")
+  starOne.classList.remove("fa-star")
 
 }else{
-console.log("doing well!")
+console.log("yay!")
 }
 }
-*/
 
-let cardDeck = document.querySelectorAll('.deck');
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -66,20 +71,25 @@ function resetGame() {
   matchedCards = [];
   unmatchedCards = [];
 
-  cardArray = shuffle(cardArray);
-  //console.log( "shuffle" );
 
-  cardArray.forEach(function(card) {
+let cardDeck = document.querySelector('.deck');
+
+  var shuffleArray = shuffle(cardArray);
+  shuffleArray = cardArray.forEach(function(card) {
     let li = document.createElement('li');
     li.innerHTML = card;
+      cardDeck.appendChild(card);
+
     card.classList.remove("open", "show", "match", "unmatch");
 
     // add event listener for once card clicked
     card.addEventListener("click", clickedCard);
 
     //start time on click of first card
-    setTime();
+$("card").one( "click", setTime());
 
+
+//function for what happens when cards are clicked in
     function clickedCard() {
       console.log("open... " + openCards);
       console.log(openCards.includes(card));
@@ -94,8 +104,8 @@ function resetGame() {
         openCards.push(card);
 
         if(openCards.length === 2) {
-          //starRating();
           movesCounter();
+          starRating();
           if(openCards[0].firstElementChild.classList[1] === openCards[1].firstElementChild.classList[1]) {
             match();
           } else {
@@ -104,6 +114,7 @@ function resetGame() {
         } else {
           //console.log("already has 2 cards!");
         }
+
       }
     }
   })
@@ -130,6 +141,7 @@ function match() {
   //console.log("true!")
   openCards = [];
   //css animation shake here
+
 }
 
 function unmatch() {
@@ -152,21 +164,22 @@ function unmatch() {
   unmatchedCards = [];
   //css animation-shake here
 
-/* Modal HTML by https://www.w3schools.com/howto/howto_css_modals.asp */
+// Modal HTML by https://www.w3schools.com/howto/howto_css_modals.asp
 // Get the modal
 var modal = document.getElementById('memoryModal');
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user matched all 16 cards, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
 
-if (matchedCards === 16){ function modal () {
+/* When the user matched all 16 cards, open the modal
+if (matchedCards.length === 16){ function modal () {
     modal.style.display = "block";
     console.log("modal!");
 }
-}
-
+}*/
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
     modal.style.display = "none";
@@ -178,7 +191,7 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }}
-
+ 
 //Timer Function As seen on https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
