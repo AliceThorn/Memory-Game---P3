@@ -25,7 +25,7 @@
 
         	<span id = "counter" class="moves">0</span> Moves
 
-          <!-- Display the countdown timer in an element -->
+          <!-- Display the countdown timer -->
           <div id ="clock"  class="timer">
               <label id="minutes">00</label>:<label id="seconds">00</label>
           </div>
@@ -100,8 +100,13 @@
         <span class="close">&times;</span>
         <h1>Congratulations! You have completed the Memory Game!
         </h1>
-        <p>Moves = x, Rating = y, Time = z.
-        </p>
+        <h2>
+        Number of Moves = <span id = "finalCounter" class="finalmoves"></span>,
+        Star Rating =  <span id = "finalRating" class="finalrating"></span>,
+        Your Time = <span id = "finalTime" class="finalseconds"></span>
+        </h2>
+        <button type="button" class="button" id = "btn" >Would you like to play again?</button>
+
       </div>
 
     </div>
