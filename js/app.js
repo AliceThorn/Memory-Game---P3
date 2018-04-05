@@ -2,9 +2,13 @@
 let allCards = document.querySelectorAll('.card');
 let cardArray = [].slice.call(allCards);
 let cardDeck = document.querySelector('.deck');
-let openCards = [];
-let matchedCards = [];
-let unmatchedCards = [];
+let open = document.querySelectorAll('.card open show');
+let openCards = [].slice.call(open);
+let matched = document.querySelectorAll('.card match');
+let matchedCards = [].slice.call(matched);
+let unmatched = document.querySelectorAll('.card unmatch');
+let unmatchedCards = [].slice.call(unmatched);
+
 //Timer Function
 let timerStarted = false;
 let moves = 0;
@@ -97,9 +101,9 @@ function shuffle(array) {
 
 
 function resetGame() {
-    openCards = [];
-    matchedCards = [];
-    unmatchedCards = [];
+    openCards.length = 0
+    matchedCards.length = 0
+    unmatchedCards.length = 0
     moves = 0;
     resetMovesCounter();
     stopTimer();
@@ -136,21 +140,22 @@ function clickedCard(event) {
         //display the cards symbol once clicked
         card.classList.add("open", "show");
         //add the card to a array of "open" cards
+        if (openCards.length < 2) {
           openCards.push(card);
-
-        if (openCards.length >= 2) {
+        }
+        if (openCards.length === 2) {
             movesCounter();
             starRating();
-            if (openCards[0].firstElementChild.className === openCards[1].firstElementChild.className) {
+            if (openCards[0].firstElement.classList[1] === openCards[1].firstElement.classList[1]) {
                 match();
-                console.log(openCards)
             } else {
                 unmatch();
-                console.log(openCards)
             }
+        }
+
     }
 }
-}
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -170,7 +175,7 @@ function match() {
 
     matchedCards.push(openCards[0]);
     matchedCards.push(openCards[1]);
-    openCards = [];
+    openCards.length = 0
     //css animation-shake would go here
 
     if (matchedCards.length === 16) {
@@ -193,10 +198,9 @@ function unmatch() {
         }, 1000);
         cardArray.push(unmatchedCards[0])
         cardArray.push(unmatchedCards[1])
-
     });
-    openCards = [];
-    unmatchedCards = [];
+    openCards.length = 0
+    unmatchedCards.length = 0
     //css animation-shake would go here
 }
 
