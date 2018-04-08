@@ -25,7 +25,7 @@
 
         	<span id = "counter" class="moves">0</span> Moves
 
-          <!-- Display the countdown timer in an element -->
+          <!-- Display the countdown timer -->
           <div id ="clock"  class="timer">
               <label id="minutes">00</label>:<label id="seconds">00</label>
           </div>
@@ -90,7 +90,8 @@
 
 
     <!-- Modal HTML by https://www.w3schools.com/howto/howto_css_modals.asp -->
-  
+    <!-- Trigger/Open The Modal -->
+
     <!-- The Modal -->
     <div id="memoryModal" class="modal">
 
@@ -99,8 +100,13 @@
         <span class="close">&times;</span>
         <h1>Congratulations! You have completed the Memory Game!
         </h1>
-        <p>Moves = x, Rating = y, Time = z.
-        </p>
+        <h2>
+        <p>Number of Moves = <span id = "finalCounter" class="finalmoves"></span>,</p>
+        <p>Star Rating =  <span id = "finalRating" class="finalrating"></span>,<p>
+        <p>Your Time = <span id = "finalTime" class="finalseconds"></span><p>
+        </h2>
+        <button type="button" class="button" id = "btn" >Would you like to play again?</button>
+
       </div>
 
     </div>
