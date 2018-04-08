@@ -86,6 +86,7 @@ h1 {
     background: #ff0000;
     font-size: 33px;
 }
+
 /*
  * Styles for the Score Panel
  */
@@ -211,4 +212,9 @@ h1 {
     height: 125px;
     width: 125px;
   }
+}
+
+
+#finalRating {
+    list-style: none;
 }

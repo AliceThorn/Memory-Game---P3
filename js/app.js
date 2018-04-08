@@ -124,13 +124,12 @@ function shuffleCards() {
     })
 }
 
+
+
 //function for what happens when cards are clicked in
 function clickedCard(event) {
     card = event.target;
-    //do not allow this event to happen on another than fa
-    if(card.classList.toString() == ("fa")) {
-      return;
-    }
+
     if (!timerStarted) {
         startTimer();
     }
@@ -138,23 +137,28 @@ function clickedCard(event) {
         return;
     } else {
         //display the cards symbol once clicked
-        card.classList.add("open", "show");
+        card.classList.add("open", "show")
         //add the card to a array of "open" cards
-        if (openCards.length < 2) {
+          console.log("first card")
           openCards.push(card);
-        }
         if (openCards.length === 2) {
             movesCounter();
             starRating();
-            if (openCards[0].firstElement.classList[1] === openCards[1].firstElement.classList[1]) {
+            if (openCards[0].firstElementChild.classList[1] === openCards[1].firstElementChild.classList[1]) {
+              console.log("cards match");
                 match();
             } else {
+               console.log("no match")
                 unmatch();
             }
         }
-
+      }
     }
-}
+
+$(".card i").click(function(e) {
+      console.log("The span element was clicked.");
+   e.stopPropagation();
+})
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -189,7 +193,6 @@ function unmatch() {
     openCards[1].classList.add("unmatch");
     openCards[0].classList.remove("open", "show");
     openCards[1].classList.remove("open", "show");
-
     unmatchedCards.push(openCards[0]);
     unmatchedCards.push(openCards[1]);
     unmatchedCards.forEach(function(card) {
@@ -201,6 +204,11 @@ function unmatch() {
     });
     openCards.length = 0
     unmatchedCards.length = 0
+//if two cards are on board do not trigger clickedCard
+    if (matchedCards === 2){
+    openCards.preventDefault()
+    }
+
     //css animation-shake would go here
 }
 
@@ -288,5 +296,6 @@ $(document).ready(function() {
         // add event listener for once card clicked
         card.addEventListener("click", clickedCard);
       })
+
     })
     resetGame();
